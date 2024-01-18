@@ -227,8 +227,8 @@ class VoiceCloningService(AIModelService):
                 self.punish(ax, service="Voice Cloning", punish_message=self.response.dendrite.status_message)
             elif self.response is not None and isinstance(self.response, lib.protocol.VoiceClone) and self.response.clone_output is not None and self.response.dendrite.status_code == 200:
                 self.handle_clone_output(ax, self.response)
-            else:
-                self.punish(ax, service="Voice Cloning")
+            # else:
+            #     self.punish(ax, service="Voice Cloning")
             return ax.hotkey
         except Exception as e:
             print(f"An error occurred while processing voice clone responses: {e}")
