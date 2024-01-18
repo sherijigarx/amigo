@@ -358,9 +358,11 @@ def main(config):
         bt.logging.success("The prompt received from validator!")
         if config.model == "microsoft/speecht5_tts":
             speech = tts_models.generate_speech(synapse.text_input)
-        if config.model == "elevenlabs/eleven":
+        elif config.model == "elevenlabs/eleven":
             speech = tts_models.generate_speech(synapse.text_input)
-        if config.model == "facebook/mms-tts-eng":
+        elif config.model == "suno/bark":
+            speech = tts_models.generate_speech(synapse.text_input)
+        elif config.model == "facebook/mms-tts-eng":
             speech = tts_models.generate_speech(synapse.text_input)
             audio_data = speech / torch.max(torch.abs(speech))
 
