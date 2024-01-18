@@ -183,10 +183,17 @@ def main(config):
                 f"Blacklisting unrecognized hotkey {synapse.dendrite.hotkey}"
             )
             return True, "Unrecognized hotkey"
-        bt.logging.trace(
-            f"Not Blacklisting recognized hotkey {synapse.dendrite.hotkey}"
-        )
-        return False, "Hotkey recognized!"
+        elif synapse.hotkey in metagraph.hotkeys and metagraph.S[metagraph.hotkeys.index(synapse.hotkey)] < 20000:
+            # Ignore requests from entities with low stake.
+            bt.logging.trace(
+                f"Blacklisting hotkey {synapse.dendrite.hotkey} with low stake"
+            )
+            return True, "Low stake"
+        else:
+            bt.logging.trace(
+                f"Not Blacklisting recognized hotkey {synapse.dendrite.hotkey}"
+            )
+            return False, "Hotkey recognized!"
 
     # The priority function determines the order in which requests are handled.
     # More valuable or higher-priority requests are processed before others.
@@ -323,10 +330,17 @@ def main(config):
                 f"Blacklisting unrecognized hotkey {synapse.dendrite.hotkey}"
             )
             return True, "Unrecognized hotkey"
-        bt.logging.trace(
-            f"Not Blacklisting recognized hotkey {synapse.dendrite.hotkey}"
-        )
-        return False, "Hotkey recognized!"
+        elif synapse.hotkey in metagraph.hotkeys and metagraph.S[metagraph.hotkeys.index(synapse.hotkey)] < 20000:
+            # Ignore requests from entities with low stake.
+            bt.logging.trace(
+                f"Blacklisting hotkey {synapse.dendrite.hotkey} with low stake"
+            )
+            return True, "Low stake"
+        else:
+            bt.logging.trace(
+                f"Not Blacklisting recognized hotkey {synapse.dendrite.hotkey}"
+            )
+            return False, "Hotkey recognized!"
 
     # The priority function determines the order in which requests are handled.
     # More valuable or higher-priority requests are processed before others.
